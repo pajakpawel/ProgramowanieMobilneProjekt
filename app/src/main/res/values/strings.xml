@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Milionerzy</string>
+    <string name="rules">Gra polega na sekwencyjnym odpowiadaniu na kolejne pytania
+                        poprzez naciśnięcie odpowiedniego przycisku. W razie udzielenia
+                        błędnej odpowiedzi lub nieudzielenia odpowiedzi w wyznaczoym czasie
+                        gra kończy się przegraną. Aby wygrać należy udzielić odpowiednią ilość
+                        poprawnych odpowiedzi.</string>
 </resources>
