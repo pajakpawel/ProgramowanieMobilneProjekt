@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
 
     public void newGameButtonOnClick(View view)
     {
-
+        startActivity(new Intent(MainActivity.this, GameActivity.class));
     }
 
     public void rulesButtonOnClick(View view)
