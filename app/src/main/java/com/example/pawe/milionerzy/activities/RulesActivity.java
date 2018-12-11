@@ -1,7 +1,8 @@
-package com.example.pawe.milionerzy;
+package com.example.pawe.milionerzy.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.pawe.milionerzy.R;
 
 public class RulesActivity extends AppCompatActivity
 {
