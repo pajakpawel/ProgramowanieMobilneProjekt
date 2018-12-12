@@ -17,6 +17,11 @@ import com.example.pawe.milionerzy.R;
 import com.example.pawe.milionerzy.service.ServiceCallBacks;
 
 import java.io.Console;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements ServiceCallBacks
@@ -50,9 +55,22 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         Random rand = new Random();
         int id_record = rand.nextInt(end) + start;
 
+        while(Record.previousQuestions.contains(id_record))
+        {
+            id_record = rand.nextInt(end) + start;
+        }
+
         //Log.d("xd","\"ILE REKORDOW: " + id_record);
+        Record.previousQuestions.add(id_record);
+
+//        for (int id : Record.previousQuestions)
+//        {
+//            Log.d("xd", "Element: " + id);
+//        }
+
 
         Record record = dbManager.getRecord(id_record);
+        final String correctAnswer = record.getCorrectAnswer();
 
         textView.setText(record.getQuestion());
         buttonA.setText("A." + record.getAnswer1());
@@ -63,28 +81,28 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog("Niepoprawna odpowiedź. Przegrałeś");
+                ShowDialog(correctAnswer, "A");
             }
         });
 
         buttonB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog("Poprawna odpowiedź. Wygrałeś!");
+                ShowDialog(correctAnswer, "B");
             }
         });
 
         buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog("Niepoprawna odpowiedź. Przegrałeś");
+                ShowDialog(correctAnswer, "C");
             }
         });
 
         buttonD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog("Niepoprawna odpowiedź. Przegrałeś");
+                ShowDialog(correctAnswer, "D");
             }
         });
 
@@ -139,23 +157,57 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
     };
 
 
-    public void ShowDialog(String message)
+    public void ShowDialog(String correctAnswer, String answer)
     {
         if(mBound)
             mService.stopTimer();
+
+        String message = "";
+
+        //Log.d("xd", correctAnswer + " " + answer);
+
+        if (correctAnswer.equals(answer))
+        {
+            if (Record.previousQuestions.size() >= 5)
+            {
+                Record.previousQuestions.clear();
+                Dialog("Wygrałeś milion. Gratulacje!");
+                return;
+            }
+
+
+            message = "Gratulacje, przechodzisz do następnego pytania";
+            dlgAlert.setMessage(message)
+                    .setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(GameActivity.this, GameActivity.class));
+                                }
+                            });
+            dlgAlert.show();
+        }
+        else
+        {
+            message = "Błędna odpowiedź, przegrałeś";
+            Dialog(message);
+        }
+    }
+
+    public void Dialog(String message)
+    {
         dlgAlert.setMessage(message)
                 .setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(GameActivity.this, MainActivity.class));
-                    }
-                });
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(GameActivity.this, MainActivity.class));
+                            }
+                        });
         dlgAlert.show();
     }
 
     @Override
     public void showLostDialog()
     {
-        ShowDialog("Koniec czasu. Przegrałeś");
+        Dialog("Koniec czasu. Przegrałeś");
     }
 }
