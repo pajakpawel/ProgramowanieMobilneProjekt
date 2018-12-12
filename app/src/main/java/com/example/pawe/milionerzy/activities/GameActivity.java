@@ -5,12 +5,19 @@ import android.content.*;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.pawe.milionerzy.DBobjects.DBManager;
+import com.example.pawe.milionerzy.models.Record;
 import com.example.pawe.milionerzy.service.BoundService;
 import com.example.pawe.milionerzy.R;
 import com.example.pawe.milionerzy.service.ServiceCallBacks;
+
+import java.io.Console;
+import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements ServiceCallBacks
 {
@@ -21,6 +28,8 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
     private boolean mBound = false;
     Intent intentBoundService;
 
+    private DBManager dbManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +39,26 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         Button buttonB = (Button)(findViewById(R.id.button2));
         Button buttonC = (Button)(findViewById(R.id.button3));
         Button buttonD = (Button)(findViewById(R.id.button4));
+        TextView textView = findViewById(R.id.textView3);
 
         dlgAlert  = new AlertDialog.Builder(this);
+
+        //wypełnienie rekordu danymi z bazy
+        dbManager = new DBManager(this);
+        int start = 1;
+        int end = dbManager.getCountOfRecords();
+        Random rand = new Random();
+        int id_record = rand.nextInt(end) + start;
+
+        //Log.d("xd","\"ILE REKORDOW: " + id_record);
+
+        Record record = dbManager.getRecord(id_record);
+
+        textView.setText(record.getQuestion());
+        buttonA.setText("A." + record.getAnswer1());
+        buttonB.setText("B." + record.getAnswer2());
+        buttonC.setText("C." + record.getAnswer3());
+        buttonD.setText("D." + record.getAnswer4());
 
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
