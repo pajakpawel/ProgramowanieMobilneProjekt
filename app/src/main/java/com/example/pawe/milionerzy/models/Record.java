@@ -1,5 +1,8 @@
 package com.example.pawe.milionerzy.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Record {
     private int id;
     private String question;
@@ -8,6 +11,8 @@ public class Record {
     private String answer3;
     private String answer4;
     private String correctAnswer;
+    //lista uzywanych juz id-ków pytań, dałem to tutaj bo tak
+    public static final List<Integer> previousQuestions = new ArrayList<Integer>();
 
     public Record(String question, String answer1, String answer2, String answer3, String answer4, String correctAnswer)
     {
