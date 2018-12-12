@@ -30,6 +30,11 @@ public class Record {
         this.correctAnswer = correctAnswer;
     }
 
+    public Record()
+    {
+
+    }
+
     public int getId()
     {
         return id;
