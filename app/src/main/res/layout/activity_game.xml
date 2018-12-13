@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMint"
+    android:background="@drawable/activity_background"
     tools:context=".activities.GameActivity">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:text="Kto był pierwszym królem Polski ?"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="Kto był pierwszym królem Polski ?"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
     <Button
         android:id="@+id/button1"
@@ -27,13 +27,15 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:text="A. Mieszko I"
-        android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintVertical_bias="0.498"
+        android:background="@drawable/button_background"
+        android:textColor="@color/colorWhite"
+    />
 
     <Button
         android:id="@+id/button2"
@@ -43,10 +45,12 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="30dp"
         android:text="B. Bolesław Chrobry"
-        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        android:background="@drawable/button_background"
+        android:textColor="@color/colorWhite"
+    />
 
     <Button
         android:id="@+id/button3"
@@ -56,11 +60,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
         android:text="C. Stanisław August Poniatowski"
-        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:background="@drawable/button_background"
+        android:textColor="@color/colorWhite"
+    />
 
     <Button
         android:id="@+id/button4"
@@ -70,17 +76,19 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:text="D. Bolesław Śmiały"
-        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        android:background="@drawable/button_background"
+        android:textColor="@color/colorWhite"
+    />
     <TextView
             android:text="Pozostały czas: "
             android:layout_width="172dp"
             android:layout_height="32dp"
             android:id="@+id/remainingTimeTextView"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView3"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/button1"
@@ -89,7 +97,7 @@
             android:text="10"
             android:layout_width="100dp"
             android:layout_height="32dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20dp"
             android:id="@+id/timerTextView" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toEndOf="@+id/remainingTimeTextView" android:layout_marginStart="8dp"

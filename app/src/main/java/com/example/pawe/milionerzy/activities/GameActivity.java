@@ -113,15 +113,14 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
     protected void onStop()
     {
         super.onStop();
-        Log.d("DEBUG:","GameActivity onStop() mBound = " + mBound);// TODO delete
+        //Log.d("DEBUG:","GameActivity onStop() mBound = " + mBound);// TODO delete
 
         if (mBound)
         {
             mBound = false;
             mService.setCallbacks(null);
             unbindService(mConnection);
-            stopService(intentBoundService);
-            Log.d("DEBUG:","GameActivity onStop() inside if");// TODO delete
+            //Log.d("DEBUG:","GameActivity onStop() inside if");// TODO delete
         }
 
     }
@@ -143,7 +142,7 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
             mService = binder.getService();
             mBound = true;
 
-            Log.d("DEBUG::","GameActivity onServiceConnected()");// TODO delete
+            //Log.d("DEBUG::","GameActivity onServiceConnected()");// TODO delete
 
             TextView timerTextView = (TextView)findViewById(R.id.timerTextView);
             mService.setTimerTextView(timerTextView);
@@ -154,7 +153,7 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         @Override
         public void onServiceDisconnected(ComponentName className)
         {
-            Log.d("DEBUG::","GameActivity onServiceDisconnected()");// TODO delete
+            //Log.d("DEBUG::","GameActivity onServiceDisconnected()");// TODO delete
             mService = null;
             mBound = false;
         }
