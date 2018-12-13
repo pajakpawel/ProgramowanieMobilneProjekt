@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Milionerzy</string>
-    <string name="rules">Gra polega na sekwencyjnym odpowiadaniu na kolejne pytania
-                        poprzez naciśnięcie odpowiedniego przycisku. W razie udzielenia
-                        błędnej odpowiedzi lub nieudzielenia odpowiedzi w wyznaczoym czasie
-                        gra kończy się przegraną. Aby wygrać należy udzielić odpowiednią ilość
-                        poprawnych odpowiedzi.</string>
+    <string name="rules_part_1">
+        Gra polega na sekwencyjnym odpowiadaniu na kolejne pytania poprzez naciśnięcie odpowiedniego przycisku.
+        W razie udzielenia błędnej odpowiedzi lub nieudzielenia odpowiedzi w wyznaczoym czasie gra kończy się przegraną.
+    </string>
+
+    <string name="rules_part_2">
+        Odpowiedź na pytanie musi zostać udizielona w czasie mniejszym niż 10 sekund.
+        Aby wygrać należy udzielić pięć poprawnych odpowiedzi. Aby wyjść do panelu głównego naciśnij przycisk powrotu.
+        Aby rozpocząć nową grę przejdź do panelu głównego oraz naciśnij przycisk "Nowa Gra".
+    </string>
+
 </resources>

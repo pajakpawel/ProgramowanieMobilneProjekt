@@ -60,10 +60,10 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
             id_record = rand.nextInt(end) + start;
         }
 
-        //Log.d("xd","\"ILE REKORDOW: " + id_record);
+        //Log.d("xd","\"ILE REKORDOW: " + id_record); TODO delete
         Record.previousQuestions.add(id_record);
 
-//        for (int id : Record.previousQuestions)
+//        for (int id : Record.previousQuestions) TODO delete
 //        {
 //            Log.d("xd", "Element: " + id);
 //        }
@@ -107,20 +107,21 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         });
 
         intentBoundService = new Intent(GameActivity.this, BoundService.class);
-        bindService(intentBoundService, mConnection, Context.BIND_AUTO_CREATE);
-
+        bindService(intentBoundService, mConnection, BIND_AUTO_CREATE);
     }
 
     protected void onStop()
     {
         super.onStop();
-        //Log.d("DEBUG","MainActivity onStop()"); TODO delete
+        Log.d("DEBUG:","GameActivity onStop() mBound = " + mBound);// TODO delete
 
         if (mBound)
         {
             mBound = false;
             mService.setCallbacks(null);
             unbindService(mConnection);
+            stopService(intentBoundService);
+            Log.d("DEBUG:","GameActivity onStop() inside if");// TODO delete
         }
 
     }
@@ -142,6 +143,8 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
             mService = binder.getService();
             mBound = true;
 
+            Log.d("DEBUG::","GameActivity onServiceConnected()");// TODO delete
+
             TextView timerTextView = (TextView)findViewById(R.id.timerTextView);
             mService.setTimerTextView(timerTextView);
             mService.setCallbacks(GameActivity.this);
@@ -151,6 +154,7 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
         @Override
         public void onServiceDisconnected(ComponentName className)
         {
+            Log.d("DEBUG::","GameActivity onServiceDisconnected()");// TODO delete
             mService = null;
             mBound = false;
         }
@@ -160,11 +164,13 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
     public void ShowDialog(String correctAnswer, String answer)
     {
         if(mBound)
-            mService.stopTimer();
-
+        {
+            unbindService(mConnection);
+            mBound = false;
+        }
         String message = "";
 
-        //Log.d("xd", correctAnswer + " " + answer);
+        //Log.d("xd", correctAnswer + " " + answer); TODO delete
 
         if (correctAnswer.equals(answer))
         {
@@ -181,7 +187,9 @@ public class GameActivity extends AppCompatActivity implements ServiceCallBacks
                     .setPositiveButton("Ok",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(GameActivity.this, GameActivity.class));
+                                    Intent intent = new Intent(GameActivity.this, GameActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                 }
                             });
             dlgAlert.show();
