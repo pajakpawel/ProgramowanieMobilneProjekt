@@ -33,7 +33,7 @@ public class BoundService extends IntentService {
     public void onCreate()
     {
         super.onCreate();
-        Toast.makeText(this, "Bounded Service start", Toast.LENGTH_SHORT).show(); //TODO delete
+        //Toast.makeText(this, "Bounded Service start", Toast.LENGTH_SHORT).show(); //TODO delete
         mTimer = new Timer();
         mTimer.scheduleAtFixedRate(new BoundService.TimeDisplayTimerTask(), INTERVAL, INTERVAL);
     }
@@ -56,7 +56,7 @@ public class BoundService extends IntentService {
     {
         //Log.d("DEBUG","BoundService onDestroy()"); TODO delete
         mTimer.cancel();
-        Toast.makeText(getApplicationContext(), "Bound Service stopped", Toast.LENGTH_SHORT).show(); //TODO delete
+        //Toast.makeText(getApplicationContext(), "Bound Service stopped", Toast.LENGTH_SHORT).show(); //TODO delete
     }
 
     public class BoundServiceBinder extends Binder
